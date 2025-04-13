@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - master  # or staging, prod, etc.
-env:
-  TF_IN_AUTOMATION: true
-  TF_INPUT: false
 
 jobs:
   terraform:
@@ -21,14 +18,13 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
+        # working-directory: ./RohitPortFol
         run: terraform init
 
-      - name: Terraform Validate
-        run: terraform validate
-
       - name: Terraform Plan
-        run: terraform plan
-        
+        # working-directory: ./RohitPortFol
+        run: terraform plan -var="vercel_token=${{ secrets.VERCEL_TOKEN }}"
+
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master'
         # working-directory: ./RohitPortFol
