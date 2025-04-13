@@ -18,14 +18,14 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: ./infra
+        working-directory: ./RohitPortFol
         run: terraform init
 
       - name: Terraform Plan
-        working-directory: ./infra
+        working-directory: ./RohitPortFol
         run: terraform plan -var="vercel_token=${{ secrets.VERCEL_TOKEN }}"
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        working-directory: ./infra
+        working-directory: ./RohitPortFol
         run: terraform apply -auto-approve -var="vercel_token=${{ secrets.VERCEL_TOKEN }}"
