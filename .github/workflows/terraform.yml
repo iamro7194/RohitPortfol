@@ -1,0 +1,31 @@
+name: Terraform Apply
+
+on:
+  push:
+    branches:
+      - main  # or staging, prod, etc.
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Terraform Init
+        working-directory: ./infra
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ./infra
+        run: terraform plan -var="vercel_token=${{ secrets.VERCEL_TOKEN }}"
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        working-directory: ./infra
+        run: terraform apply -auto-approve -var="vercel_token=${{ secrets.VERCEL_TOKEN }}"
