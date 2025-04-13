@@ -13,7 +13,10 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-
+      - name: Terraform Sleep
+        # working-directory: ./RohitPortFol
+        run: sleep 120
+        
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
