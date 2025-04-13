@@ -4,6 +4,6 @@ resource "vercel_project" "my_project" {
 
   git_repository = {
     type = "github"
-    repo = "yourusername/your-repo"
+    repo = "iamro7194/RohitPortfol"
   }
 }
