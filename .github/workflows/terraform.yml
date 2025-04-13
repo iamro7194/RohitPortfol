@@ -3,7 +3,7 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - main  # or staging, prod, etc.
+      - master  # or staging, prod, etc.
 
 jobs:
   terraform:
